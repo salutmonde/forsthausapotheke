@@ -1,9 +1,5 @@
 package de.forsthausapotheke.dao;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
@@ -13,24 +9,10 @@ import javax.persistence.PersistenceUnit;
  */
 public class BaseDao {
 
-    /*
-    protected EntityManager em = null;
-    @PersistenceUnit(name = "persistenceUnitName")
-    */
-    @Autowired
-    protected SessionFactory sessionFactory;
-
-//    public void setSessionFactory(SessionFactory sessionFactory) {
-//        this.sessionFactory = sessionFactory;
-//    }
-
-    protected Session getSession() {
-        return sessionFactory.openSession();
-    }
-       /*
     @PersistenceContext
-    public void setEntityManager(EntityManager em) {
-        this.em = em;
-    }
-    */
+    protected EntityManager em;
+
+//    @PersistenceUnit(name = "hormone-invoice")
+//    protected EntityManager em = null;
+
 }

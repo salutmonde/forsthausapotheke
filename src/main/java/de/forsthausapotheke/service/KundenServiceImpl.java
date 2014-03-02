@@ -5,18 +5,26 @@ import de.forsthausapotheke.model.Kunde;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.List;
+
 /**
  * Created by HSoleymani on 23.02.14.
  */
 
-@Service("kundenService")
+@Service
 public class KundenServiceImpl implements KundenService {
 
     @Autowired
     private KundenDao kundenDao;
 
+//    @PersistenceContext
+//    EntityManager em;
+
     @Override
-    public Kunde createKunde(Kunde kunde) {
+
+    public Kunde saveKunde(Kunde kunde) {
         return kundenDao.saveKunde(kunde);
     }
 
@@ -28,6 +36,17 @@ public class KundenServiceImpl implements KundenService {
     @Override
     public boolean deleteKunde(Kunde kunde) {
         return kundenDao.deleteKunde(kunde);
+    }
+
+    @Override
+    public Kunde findById(Long id) {
+        Kunde kunde = kundenDao.findById(id);
+        return kunde;
+    }
+
+    @Override
+    public List<Kunde> findAllKunden() {
+      return   kundenDao.findAllKunden();
     }
 
 

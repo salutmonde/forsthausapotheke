@@ -1,6 +1,7 @@
 package de.forsthausapotheke.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,19 +9,22 @@ import java.util.List;
  */
 
 @Entity
-@Table(name="kunde")
+@Table(name = "kunde")
 public class Kunde {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String altId;
     private String Vorname;
     private String Nachname;
-   // private List<Adresse> adressen;
-   // private List<Rechnung> rechnungen;
+    @OneToMany(mappedBy = "kunde")
+    private List<Adresse> adressen= new ArrayList<Adresse>();
+    @OneToMany(mappedBy = "kunde")
+    private List<Rechnung> rechnungen = new ArrayList<Rechnung>();
 
-    public Kunde(){}
+    public Kunde() {
+    }
 
     public Kunde(String altId, String vorname, String nachname) {
         this.altId = altId;
@@ -60,38 +64,38 @@ public class Kunde {
         Nachname = nachname;
     }
 
-//    public List<Adresse> getAdressen() {
-//        return adressen;
-//    }
-//
-//    public void setAdressen(List<Adresse> adressen) {
-//        this.adressen = adressen;
-//    }
-//
-//    public List<Rechnung> getRechnungen() {
-//        return rechnungen;
-//    }
-//
-//    public void setRechnungen(List<Rechnung> rechnungen) {
-//        this.rechnungen = rechnungen;
-//    }
+    public List<Adresse> getAdressen() {
+        return adressen;
+    }
 
-//    public boolean addAdresse(Adresse adresse) {
-//        if (getAdressen().contains(adresse)) {
-//            return false;
-//        } else {
-//            getAdressen().add(adresse);
-//            return true;
-//        }
-//    }
-//
-//    public boolean removeAdresse(Adresse adresseToBeRemoved) {
-//        if (getAdressen().contains(adresseToBeRemoved)) {
-//            getAdressen().remove(adresseToBeRemoved);
-//            return true;
-//        }
-//        return false;
-//    }
+    public void setAdressen(List<Adresse> adressen) {
+        this.adressen = adressen;
+    }
+
+    public List<Rechnung> getRechnungen() {
+        return rechnungen;
+    }
+
+    public void setRechnungen(List<Rechnung> rechnungen) {
+        this.rechnungen = rechnungen;
+    }
+
+    public boolean addAdresse(Adresse adresse) {
+        if (getAdressen().contains(adresse)) {
+            return false;
+        } else {
+            getAdressen().add(adresse);
+            return true;
+        }
+    }
+
+    public boolean removeAdresse(Adresse adresseToBeRemoved) {
+        if (getAdressen().contains(adresseToBeRemoved)) {
+            getAdressen().remove(adresseToBeRemoved);
+            return true;
+        }
+        return false;
+    }
 
     public String toString() {
 
@@ -101,5 +105,8 @@ public class Kunde {
         return kunde.toString();
     }
 
+    public void addRechnung(Rechnung rech) {
+        getRechnungen().add(rech);
+    }
 }
 

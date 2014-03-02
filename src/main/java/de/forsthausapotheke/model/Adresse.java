@@ -1,40 +1,52 @@
 package de.forsthausapotheke.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.*;
+
 /**
  * Created by HSoleymani on 23.02.14.
  */
 
 @Entity
+@Table(name = "adresse")
 public class Adresse {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-   // private Kunde kunde;
+    @ManyToOne
+    private Kunde kunde;
     private String land;
     private String bundesland;
     private String stadt;
-    private String Strasse;
+    private String strasse;
     private String hausNr;
     private String plz;
 
-    public Adresse(){}
 
-//    public Adresse(Kunde newKunde) {
-//        this.kunde = newKunde;
-//    }
-//
-//    public Kunde getKunde() {
-//        return kunde;
-//    }
-//
-//    public void setKunde(Kunde kunde) {
-//        this.kunde = kunde;
-//    }
+    public Adresse() {
+    }
+
+    public Adresse(Kunde kunde, String land, String bundesland, String stadt, String strasse, String hausNr, String plz) {
+        this.kunde = kunde;
+        this.land = land;
+        this.bundesland = bundesland;
+        this.stadt = stadt;
+        this.strasse = strasse;
+        this.hausNr = hausNr;
+        this.plz = plz;
+    }
+
+    public Adresse(Kunde newKunde) {
+        this.kunde = newKunde;
+    }
+
+    public Kunde getKunde() {
+        return kunde;
+    }
+
+    public void setKunde(Kunde kunde) {
+        this.kunde = kunde;
+    }
 
     public String getLand() {
         return land;
@@ -61,11 +73,11 @@ public class Adresse {
     }
 
     public String getStrasse() {
-        return Strasse;
+        return strasse;
     }
 
     public void setStrasse(String strasse) {
-        Strasse = strasse;
+        strasse = strasse;
     }
 
     public String getHausNr() {

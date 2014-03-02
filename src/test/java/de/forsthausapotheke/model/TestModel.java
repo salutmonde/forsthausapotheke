@@ -2,6 +2,8 @@ package de.forsthausapotheke.model;
 
 import org.junit.Test;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,10 +11,12 @@ import java.util.List;
  * Created by HSoleymani on 23.02.14.
  */
 public class TestModel {
-
+    @PersistenceContext (name = "hormone-invoice")
+    EntityManager em;
     @Test
     public void createKunde() {
         Kunde k = makeKunde();
+        em.merge(k);
         List<Adresse> adressen = makeAdressen(k);
       //  k.setAdressen(adressen);
 

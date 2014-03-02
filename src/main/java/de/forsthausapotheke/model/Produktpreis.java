@@ -1,28 +1,38 @@
 package de.forsthausapotheke.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by HSoleymani on 23.02.14.
  */
 @Entity
+@Table(name = "produktpreis")
 public class Produktpreis {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-  //  private Rechnung rechnung;
-    private Double Menge;
+    //    private Rechnung rechnung;
+    private Double menge;
     private Double nettoPreis;
     private Double bruttoPreis;
     private Double gesammtPreis;
     private Double mwst;
 
-    public Produktpreis( ){}
+    public Produktpreis() {
+    }
 
+    public Produktpreis(Double menge, Double nettoPreis) {
+        this.menge = menge;
+        this.nettoPreis = nettoPreis;
+        calculatePrice();
+    }
+
+    private void calculatePrice() {
+        bruttoPreis = nettoPreis * 1.19;
+        gesammtPreis = bruttoPreis * menge;
+    }
+    //
 //    public Rechnung getRechnung() {
 //        return rechnung;
 //    }
@@ -32,11 +42,11 @@ public class Produktpreis {
 //    }
 
     public Double getMenge() {
-        return Menge;
+        return menge;
     }
 
     public void setMenge(Double menge) {
-        Menge = menge;
+        menge = menge;
     }
 
     public Double getNettoPreis() {

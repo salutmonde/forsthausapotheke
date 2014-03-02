@@ -21,11 +21,10 @@ http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
     <context:component-scan base-package="de.forsthausapotheke"/>
 
     <!-- Make sure the following is specified to enable transaction -->
-    <tx:annotation-driven/>
+    <tx:annotation-driven transaction-manager="transactionManager" />
     <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
-
     <!-- This defines the entity manager factory with some custom properties -->
     <bean id='entityManagerFactory' class='org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean'>
         <property name="persistenceUnitName" value="hormone-invoice"/>
